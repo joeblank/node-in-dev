@@ -19,4 +19,4 @@
   - You will need to select the ```node_assessment.postman_collection.json``` file (located in the ```postman_testing``` folder).
 
 #### Running the tests
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![alt text](https://raw.githubusercontent.com/joeblank/node-in-dev/blob/master/import_button.png)
