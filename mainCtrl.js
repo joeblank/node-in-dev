@@ -9,46 +9,46 @@ module.exports = {
           favs.push(users[i])
         }
       }
-      return res.status(200).send(favs)
+      return res.status(200).json(favs)
     } else if(req.query.age) {
-      return res.status(200).send(users.filter(user => user.age < req.query.age))
+      return res.status(200).json(users.filter(user => user.age < req.query.age))
     } else if (req.query.lastname) {
-      return res.status(200).send(users.filter(user=> user.last_name === req.query.lastname))
+      return res.status(200).json(users.filter(user=> user.last_name === req.query.lastname))
     } else if (req.query.email) {
       let user = users.filter(user=>user.email === req.query.email)
       console.log(user);
-      return res.status(200).send(user[0]);
+      return res.status(200).json(user[0]);
     }
-     res.status(200).send( users);
+     res.status(200).json( users);
   },
   getUserById(req,res) {
 
     for (var i = 0; i < users.length; i++) {
       if (req.params.id == users[i].id) {
-        return res.status(200).send(users[i])
+        return res.status(200).json(users[i])
       }
     }
-    res.status(404).json(null);
+    res.status(404).json({userFound: false});
   },
   getAdmins(req,res) {
     let admins = users.filter(user => user.type === 'admin');
-    res.status(200).send(admins);
+    res.status(200).json(admins);
   },
   getNonAdmins(req,res) {
     let nonAdmins = users.filter(user => user.type !== 'admin');
-    res.status(200).send(nonAdmins);
+    res.status(200).json(nonAdmins);
   },
   getUserByType(req,res) {
     let userType = users.filter((user)=> {
       return user.type === req.params.type
     })
-    res.status(200).send(userType)
+    res.status(200).json(userType)
   },
   getNonAdmins(req,res) {
     let nonAdmins = users.filter((user)=> {
       return user.type !== 'admin'
     })
-    res.status(200).send(nonAdmins)
+    res.status(200).json(nonAdmins)
   },
   updateUser(req,res) {
     // console.log(req.body);
@@ -64,21 +64,21 @@ module.exports = {
       users[u.id - 1].type = u.type;
       users[u.id - 1].favorites = u.favorites;
 
-    res.status(200).send(users);
+    res.status(200).json(users);
 
   },
   addUser(req,res) {
     let user = req.body
     user.id = users[users.length - 1].id + 1;
     users.push(user)
-    res.status(200).send(users)
+    res.status(200).json(users)
   },
   removeUser(req,res) {
     console.log(req.params.id);
     for (let i= 0; i < users.length; i++) {
       if (req.params.id == users[i].id){
         users.splice(i,1)
-        return res.status(200).send(users);
+        return res.status(200).json(users);
       }
     }
   }
